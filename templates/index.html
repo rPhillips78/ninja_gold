@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+
+        #wrapper{
+            width: 75%;
+            padding: 5px;
+            box-sizing: border-box;
+            vertical-align: top;
+            margin: auto;
+        }
+
+        #container {
+            width: 20%;
+            min-height: 250px;
+            border: 2px solid black;
+            display: inline-block;
+            margin: 5px 5px 10px 50px;
+            text-align: center;
+            box-shadow: 2px 2px;
+        }
+
+        h3 {
+            margin: 25px;
+        }
+
+        h4 {
+            margin: auto;
+        }
+
+        input {
+            margin: 50px;
+            box-shadow: 2px 2px;
+        }
+
+        #activity {
+            width: 90%;
+            border: 2px solid black;
+            height: 200px;
+            overflow-y: scroll;
+            margin: auto;
+            box-shadow: 3px 2px;
+        }
+        p.heading {
+            margin-left: 5%;
+        }
+
+        #activity p {
+            margin: 5px;
+        }
+
+        
+    </style>
+    <title>Home</title>
+</head>
+<body>
+    <div id="wrapper">
+        <h2>Your Gold: {{session['gold']}}</h2>
+        <div id="container">
+            <h3>Farm</h3>
+            <h4>(earns 10-20 golds)</h4>
+            <form action="/process_money" method="post">
+                <input type="hidden" name="building" value="farm">
+                <input type="submit" value="Find Gold!">
+            </form>
+        </div>
+        <div id="container">
+            <h3>Cave</h3>
+            <h4>(earns 5-10 golds)</h4>
+            <form action="/process_money" method="post">
+                <input type="hidden" name="building" value="cave">
+                <input type="submit" value="Find Gold!">
+            </form>
+        </div>
+        <div id="container">
+            <h3>House</h3>
+            <h4>(earns 2-5 golds)</h4>
+            <form action="/process_money" method="post">
+                <input type="hidden" name="building" value="house">
+                <input type="submit" value="Find Gold!">
+            </form>
+        </div>
+        <div id="container">
+            <h3>Casino</h3>
+            <h4>(earns/takes 0-50 golds)</h4>
+            <form action="/process_money" method="post">
+                <input type="hidden" name="building" value="casino">
+                <input type="submit" value="Find Gold!">
+            </form>
+        </div>
+    
+        <p class="heading">Activities:</p>
+        <div id="activity">
+            {% for item in session['activities'][::-1]: %}
+                {{item|safe}}
+            {% endfor%}
+        </div>
+    </div>
+</body>
+</html>
